@@ -9,30 +9,24 @@ import lombok.NoArgsConstructor;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Clase que representa a un usuario de la aplicación.
- * @author Jamutaq Ortega
- */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "user")
+public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long userId;
+    private Long companyId;
 
     @Column(nullable = false)
-    private String fullName;
+    private String name;
 
-    @Column(nullable = false)
-    private String district;
-
-    @Column(nullable = false, unique = true)
-    private String username;
+    @Column(nullable = false, length = 11)
+    private String ruc;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -53,8 +47,5 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
-    public Long getId() {
-        return userId;
-    }
 
 }

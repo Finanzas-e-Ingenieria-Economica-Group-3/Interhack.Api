@@ -2,7 +2,7 @@ package interhack.api.security.controller;
 
 import interhack.api.security.model.dto.request.LoginRequestDto;
 import interhack.api.security.model.dto.request.RegisterRequestDto;
-import interhack.api.security.model.dto.response.RegisteredUserResponseDto;
+import interhack.api.security.model.dto.response.RegisteredCompanyResponseDto;
 import interhack.api.security.model.dto.response.TokenResponseDto;
 import interhack.api.security.service.AuthService;
 import interhack.api.security.service.IAuthService;
@@ -40,10 +40,10 @@ public class AuthController {
     }
 
 
-    @Operation(summary = "Registra un nuevo usuario")
+    @Operation(summary = "Registra una nueva empresa")
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse<RegisteredUserResponseDto>> registerUser(@Valid @RequestBody RegisterRequestDto request) {
-        var res = service.registerUser(request);
+    public ResponseEntity<ApiResponse<RegisteredCompanyResponseDto>> registerCompany(@Valid @RequestBody RegisterRequestDto request) {
+        var res = service.registerCompany(request);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 }

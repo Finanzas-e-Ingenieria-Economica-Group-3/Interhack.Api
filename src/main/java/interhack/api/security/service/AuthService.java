@@ -3,15 +3,15 @@ package interhack.api.security.service;
 import interhack.api.security.jwt.provider.JwtTokenProvider;
 import interhack.api.security.model.dto.request.LoginRequestDto;
 import interhack.api.security.model.dto.request.RegisterRequestDto;
-import interhack.api.security.model.dto.response.RegisteredUserResponseDto;
+import interhack.api.security.model.dto.response.RegisteredCompanyResponseDto;
 import interhack.api.security.model.dto.response.TokenResponseDto;
 import interhack.api.shared.dto.enums.EStatus;
 import interhack.api.shared.dto.response.ApiResponse;
 import interhack.api.shared.exception.CustomException;
-import interhack.api.users.model.entity.User;
+import interhack.api.users.model.entity.Company;
 import interhack.api.users.model.enums.ERole;
 import interhack.api.users.repository.IRoleRepository;
-import interhack.api.users.repository.IUserRepository;
+import interhack.api.users.repository.ICompanyRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,15 +29,15 @@ import java.util.Collections;
 @Service
 public class AuthService implements IAuthService {
     private final AuthenticationManager authenticationManager;
-    private final IUserRepository userRepository;
+    private final ICompanyRepository companyRepository;
     private final IRoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final ModelMapper modelMapper;
 
-    public AuthService(AuthenticationManager authenticationManager, IUserRepository userRepository, IRoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider, ModelMapper modelMapper) {
+    public AuthService(AuthenticationManager authenticationManager, ICompanyRepository companyRepository, IRoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider, ModelMapper modelMapper) {
         this.authenticationManager = authenticationManager;
-        this.userRepository = userRepository;
+        this.companyRepository = companyRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenProvider = jwtTokenProvider;
@@ -45,23 +45,22 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public ApiResponse<RegisteredUserResponseDto> registerUser(RegisterRequestDto request) {
+    public ApiResponse<RegisteredCompanyResponseDto> registerCompany(RegisterRequestDto request) {
         //si el email ya está registrado
-        if (userRepository.existsByEmail(request.getEmail())) {
+        if (companyRepository.existsByEmail(request.getEmail())) {
             throw new CustomException(HttpStatus.CONFLICT, "El email '" + request.getEmail() + "' ya está registrado");
         }
 
         //si el username ya está registrado
-        if (userRepository.existsByUsername(request.getUsername())) {
-            throw new CustomException(HttpStatus.CONFLICT, "El username '" + request.getUsername() + "' ya está registrado");
+        if (companyRepository.existsByName(request.getName())) {
+            throw new CustomException(HttpStatus.CONFLICT, "El username '" + request.getName() + "' ya está registrado");
         }
 
         //si no existe, lo registra
-        var user = User.builder()
-                .fullName(request.getFullName())
-                .username(request.getUsername())
+        var user = Company.builder()
+                .name(request.getName())
+                .ruc(request.getRuc())
                 .email(request.getEmail())
-                .district(request.getDistrict())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
 
@@ -71,10 +70,10 @@ public class AuthService implements IAuthService {
         user.setRoles(Collections.singleton(roles)); //establece un solo rol
 
         //guarda el usuario
-        var newUser = userRepository.save(user);
+        var newUser = companyRepository.save(user);
 
         //mapea de la entidad al dto
-        var responseData = modelMapper.map(newUser, RegisteredUserResponseDto.class);
+        var responseData = modelMapper.map(newUser, RegisteredCompanyResponseDto.class);
 
         return new ApiResponse<>("Registro correcto", EStatus.SUCCESS, responseData);
     }
@@ -84,7 +83,7 @@ public class AuthService implements IAuthService {
         //se validan las credenciales
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getUsernameOrEmail(),
+                        request.getEmail(),
                         request.getPassword()
                 )
         );

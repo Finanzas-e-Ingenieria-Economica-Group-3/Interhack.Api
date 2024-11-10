@@ -2,7 +2,7 @@ package interhack.api.security.service;
 
 import interhack.api.security.model.dto.request.LoginRequestDto;
 import interhack.api.security.model.dto.request.RegisterRequestDto;
-import interhack.api.security.model.dto.response.RegisteredUserResponseDto;
+import interhack.api.security.model.dto.response.RegisteredCompanyResponseDto;
 import interhack.api.security.model.dto.response.TokenResponseDto;
 import interhack.api.shared.dto.response.ApiResponse;
 
@@ -15,7 +15,7 @@ public interface IAuthService {
      * @param request Datos para el registro
      * @return Usuario registrado
      */
-    ApiResponse<RegisteredUserResponseDto> registerUser(RegisterRequestDto request);
+    ApiResponse<RegisteredCompanyResponseDto> registerCompany(RegisterRequestDto request);
 
     /**
      * Realiza el login del usuario
