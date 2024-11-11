@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * @author Jamutaq Ortega
  */
 @Tag(name = "User")
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/companies")
 @RestController
 public class CompanyController {
     private final ICompanyService companyService;

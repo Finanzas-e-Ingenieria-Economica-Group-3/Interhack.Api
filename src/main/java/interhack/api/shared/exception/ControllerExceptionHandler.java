@@ -57,6 +57,18 @@ public class ControllerExceptionHandler {
         return new ApiResponse<>("Validaciones de entrada fallidas", EStatus.ERROR, errors);
     }
 
+    @ExceptionHandler(ConflictException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    public ApiResponse<ErrorMessage> customException(ConflictException ex, WebRequest request) {
+        var errorMessage = new ErrorMessage(
+                ex.getMessage(),
+                request.getDescription(false),
+                LocalDateTime.now()
+        );
+
+        return new ApiResponse<>("Ha ocurrido un conflicto", EStatus.ERROR, errorMessage);
+    }
+
     /**
      * Método para manejar otras excepciones que no se han contemplado
      * @param ex Excepción que se ha producido
