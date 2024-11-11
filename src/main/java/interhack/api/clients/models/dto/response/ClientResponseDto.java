@@ -13,4 +13,5 @@ public class ClientResponseDto {
     private String lastname;
     private String email;
     private String dni;
+    private Long companyId;
 }

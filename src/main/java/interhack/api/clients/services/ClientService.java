@@ -7,10 +7,9 @@ import interhack.api.clients.repository.IClientRepository;
 import interhack.api.shared.dto.enums.EStatus;
 import interhack.api.shared.dto.response.ApiResponse;
 import interhack.api.shared.exception.ConflictException;
-import interhack.api.shared.exception.CustomException;
 import interhack.api.shared.exception.ResourceNotFoundException;
+import interhack.api.users.repository.ICompanyRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,15 +17,19 @@ import java.util.List;
 @Service
 public class ClientService implements IClientService {
     private final IClientRepository clientRepository;
+    private final ICompanyRepository companyRepository;
     private final ModelMapper modelMapper;
 
-    public ClientService(IClientRepository clientRepository, ModelMapper modelMapper) {
+    public ClientService(IClientRepository clientRepository, ICompanyRepository companyRepository, ModelMapper modelMapper) {
         this.clientRepository = clientRepository;
+        this.companyRepository = companyRepository;
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public ApiResponse<ClientResponseDto> addClient(ClientRequestDto request) {
+    public ApiResponse<ClientResponseDto> addClient(ClientRequestDto request, Long companyId) {
+        var companyEntity = companyRepository.findById(companyId)
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró la empresa con id " + companyId));
 
         if (clientRepository.existsByEmail(request.getEmail())) {
             throw new ConflictException("El email '" + request.getEmail() + "' ya está registrado");
@@ -36,7 +39,7 @@ public class ClientService implements IClientService {
             throw new ConflictException("El DNI '" + request.getDni() + "' ya está registrado");
         }
 
-        var client = new Client(request);
+        var client = new Client(request, companyEntity);
 
         var newClient = clientRepository.save(client);
 
@@ -94,6 +97,19 @@ public class ClientService implements IClientService {
 
         if (clients.isEmpty()) {
             throw new ResourceNotFoundException("No se encontraron clientes");
+        }
+
+        var clientResponse = modelMapper.map(clients, List.class);
+
+        return new ApiResponse<>("Clientes encontrados", EStatus.SUCCESS, clientResponse);
+    }
+
+    @Override
+    public ApiResponse<List<ClientResponseDto>> getClientsByCompanyId(Long companyId) {
+        var clients = clientRepository.findByCompanyId(companyId);
+
+        if (clients.isEmpty()) {
+            throw new ResourceNotFoundException("No se encontraron clientes para la empresa con id " + companyId);
         }
 
         var clientResponse = modelMapper.map(clients, List.class);
