@@ -14,15 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterRequestDto {
-    @NotEmpty(message = "El nombre y apellido es requerido")
-    private String fullName;
+    @NotEmpty(message = "El nombre es requerido")
+    private String name;
 
-    @NotEmpty(message = "El nombre de usuario es requerido")
-    @Size(min = 2, message = "El nombre de usuario debe tener por lo menos 2 caracteres")
-    private String username;
+    @NotEmpty(message = "El Ruc es requerido")
+    @Size(min = 11, max = 11, message = "El ruc debe tener 11 caracteres")
+    private String ruc;
 
-    @NotEmpty(message = "El nombre de distrito es requerido")
-    private String district;
 
     @NotEmpty(message = "El email es requerido")
     @Email(message = "El formato del email no es válido")
@@ -31,7 +29,5 @@ public class RegisterRequestDto {
     @NotEmpty(message = "La contraseña es requerida")
     @Size(min = 3, message = "La contraseña debe tener por lo menos 3 caracteres")
     private String password;
-
-
 
 }

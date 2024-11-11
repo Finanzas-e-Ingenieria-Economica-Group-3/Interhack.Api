@@ -1,4 +1,4 @@
-package interhack.api.security.model.dto.response;
+package interhack.api.users.model.dto;
 
 import interhack.api.users.model.entity.Role;
 import lombok.AllArgsConstructor;
@@ -9,17 +9,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Clase que representa la respuesta de la API cuando se registra un usuario
+ * DTO para respuesta de datos de usuario
  * @author Jamutaq Ortega
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisteredUserResponseDto {
+public class CompanyResponseDto {
     private Long userId;
-    private String fullName;
-    private String username;
+    private String name;
+    private String ruc;
     private String email;
-    private String district;
     private Set<Role> roles = new HashSet<>();
 }
