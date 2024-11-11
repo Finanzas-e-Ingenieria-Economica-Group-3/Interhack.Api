@@ -16,7 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompanyResponseDto {
-    private Long userId;
+    private Long companyId;
     private String name;
     private String ruc;
     private String email;
