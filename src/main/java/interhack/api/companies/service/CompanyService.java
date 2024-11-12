@@ -1,10 +1,10 @@
-package interhack.api.users.service;
+package interhack.api.companies.service;
 
 import interhack.api.shared.dto.enums.EStatus;
 import interhack.api.shared.dto.response.ApiResponse;
 import interhack.api.shared.exception.ResourceNotFoundException;
-import interhack.api.users.model.dto.CompanyResponseDto;
-import interhack.api.users.repository.ICompanyRepository;
+import interhack.api.companies.model.dto.CompanyResponseDto;
+import interhack.api.companies.repository.ICompanyRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

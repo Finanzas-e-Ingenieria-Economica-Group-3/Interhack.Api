@@ -8,7 +8,7 @@ import interhack.api.shared.dto.enums.EStatus;
 import interhack.api.shared.dto.response.ApiResponse;
 import interhack.api.shared.exception.ConflictException;
 import interhack.api.shared.exception.ResourceNotFoundException;
-import interhack.api.users.repository.ICompanyRepository;
+import interhack.api.companies.repository.ICompanyRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

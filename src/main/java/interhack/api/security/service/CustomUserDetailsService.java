@@ -1,7 +1,7 @@
 package interhack.api.security.service;
 
 import interhack.api.shared.util.Utilities;
-import interhack.api.users.repository.ICompanyRepository;
+import interhack.api.companies.repository.ICompanyRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

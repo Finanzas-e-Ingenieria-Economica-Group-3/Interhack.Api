@@ -1,8 +1,7 @@
-package interhack.api.users.service;
+package interhack.api.companies.service;
 
 import interhack.api.shared.dto.response.ApiResponse;
-import interhack.api.users.model.dto.CompanyResponseDto;
-import interhack.api.users.model.entity.Company;
+import interhack.api.companies.model.dto.CompanyResponseDto;
 
 
 public interface ICompanyService {

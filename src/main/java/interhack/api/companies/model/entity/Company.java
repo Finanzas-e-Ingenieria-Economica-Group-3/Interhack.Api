@@ -1,4 +1,4 @@
-package interhack.api.users.model.entity;
+package interhack.api.companies.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -34,14 +34,9 @@ public class Company {
     @Column(nullable = false)
     private String password;
 
-
-    /**
-     * -Info: MUCHOS "usuarios" pueden tener MUCHOS "roles"
-     * -JoinTable: la tabla intermediaria que se creará
-     */
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "users_roles",
+            name = "companies_roles",
             joinColumns = @JoinColumn(name = "company_id", referencedColumnName = "company_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     )

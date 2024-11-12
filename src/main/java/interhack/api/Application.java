@@ -1,8 +1,8 @@
 package interhack.api;
 
 import interhack.api.shared.util.Utilities;
-import interhack.api.users.model.enums.ERole;
-import interhack.api.users.repository.IRoleRepository;
+import interhack.api.companies.model.enums.ERole;
+import interhack.api.companies.repository.IRoleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

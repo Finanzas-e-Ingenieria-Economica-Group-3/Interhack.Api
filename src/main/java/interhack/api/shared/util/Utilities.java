@@ -1,8 +1,8 @@
 package interhack.api.shared.util;
 
-import interhack.api.users.model.entity.Role;
-import interhack.api.users.model.enums.ERole;
-import interhack.api.users.repository.IRoleRepository;
+import interhack.api.companies.model.entity.Role;
+import interhack.api.companies.model.enums.ERole;
+import interhack.api.companies.repository.IRoleRepository;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;

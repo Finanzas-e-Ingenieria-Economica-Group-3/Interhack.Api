@@ -1,7 +1,7 @@
-package interhack.api.users.repository;
+package interhack.api.companies.repository;
 
-import interhack.api.users.model.entity.Role;
-import interhack.api.users.model.enums.ERole;
+import interhack.api.companies.model.entity.Role;
+import interhack.api.companies.model.enums.ERole;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

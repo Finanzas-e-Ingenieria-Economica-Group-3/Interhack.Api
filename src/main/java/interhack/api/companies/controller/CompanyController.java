@@ -1,8 +1,8 @@
-package interhack.api.users.controller;
+package interhack.api.companies.controller;
 
 import interhack.api.shared.dto.response.ApiResponse;
-import interhack.api.users.model.dto.CompanyResponseDto;
-import interhack.api.users.service.ICompanyService;
+import interhack.api.companies.model.dto.CompanyResponseDto;
+import interhack.api.companies.service.ICompanyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * Controlador para usuarios
  * @author Jamutaq Ortega
  */
-@Tag(name = "User")
+@Tag(name = "Company")
 @RequestMapping("/api/v1/companies")
 @RestController
 public class CompanyController {

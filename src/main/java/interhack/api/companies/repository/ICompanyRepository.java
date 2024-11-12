@@ -1,6 +1,6 @@
-package interhack.api.users.repository;
+package interhack.api.companies.repository;
 
-import interhack.api.users.model.entity.Company;
+import interhack.api.companies.model.entity.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

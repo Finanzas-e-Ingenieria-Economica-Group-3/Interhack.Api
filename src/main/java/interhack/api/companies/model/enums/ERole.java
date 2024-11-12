@@ -1,4 +1,4 @@
-package interhack.api.users.model.enums;
+package interhack.api.companies.model.enums;
 
 /**
  * Enum para los roles de usuario

@@ -1,6 +1,6 @@
 package interhack.api.security.model.dto.response;
 
-import interhack.api.users.model.entity.Role;
+import interhack.api.companies.model.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

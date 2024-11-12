@@ -1,7 +1,7 @@
 package interhack.api.clients.models.entities;
 
 import interhack.api.clients.models.dto.request.ClientRequestDto;
-import interhack.api.users.model.entity.Company;
+import interhack.api.companies.model.entity.Company;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
