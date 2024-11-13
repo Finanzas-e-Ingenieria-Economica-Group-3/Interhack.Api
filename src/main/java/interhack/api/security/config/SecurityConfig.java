@@ -75,7 +75,7 @@ public class SecurityConfig {
             //todas estas rutas se permiten (no requieren autenticación)
             authorize.requestMatchers(
                             "/swagger-ui/**",
-                            "/api/v1/auth/**",
+                            "/api/v1/**",
                             "/v3/api-docs/**",
                             "/error",
                             "/favicon.ico"
