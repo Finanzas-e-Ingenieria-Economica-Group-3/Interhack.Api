@@ -45,6 +45,9 @@ public class Invoice {
     @Column(nullable = false)
     private LocalDate dueDate;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "report_id", referencedColumnName = "report_id", nullable = true)
+    private Report report;
 
     public Invoice(Client client, Company company, Long amount, ECurrencyType currencyType, LocalDate issueDate, LocalDate dueDate) {
         this.client = client;
