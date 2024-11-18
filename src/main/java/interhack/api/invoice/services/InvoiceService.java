@@ -64,6 +64,17 @@ public class InvoiceService implements IInvoiceService{
     }
 
     @Override
+    public ApiResponse<List<InvoiceResponse>> getInvoiceByCompanyIdAndClientId(Long companyId, Long ClientId) {
+        var invoices = invoiceRepository.findByCompanyCompanyIdAndClientClientId(companyId, ClientId);
+
+        var invoicesResponse = invoices.stream()
+                .map(invoice -> modelMapper.map(invoice, InvoiceResponse.class))
+                .collect(Collectors.toList());
+
+        return new ApiResponse<>("Facturas encontradas", EStatus.SUCCESS, invoicesResponse);
+    }
+
+    @Override
     public ApiResponse<InvoiceResponse> createInvoice(InvoiceRequestDto request) {
         var clientEntity = clientRepository.findById(request.getClientId())
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró el cliente con id " + request.getClientId()));

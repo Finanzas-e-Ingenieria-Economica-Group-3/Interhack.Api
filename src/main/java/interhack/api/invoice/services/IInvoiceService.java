@@ -13,5 +13,7 @@ public interface IInvoiceService {
 
     ApiResponse<List<InvoiceResponse>> getInvoiceByCompanyId(Long companyId);
 
+    ApiResponse<List<InvoiceResponse>> getInvoiceByCompanyIdAndClientId(Long companyId, Long ClientId);
+
     ApiResponse<InvoiceResponse> createInvoice(InvoiceRequestDto request);
 }

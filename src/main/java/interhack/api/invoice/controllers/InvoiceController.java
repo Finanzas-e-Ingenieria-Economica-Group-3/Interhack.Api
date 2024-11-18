@@ -55,4 +55,13 @@ public class InvoiceController {
         var response = invoiceService.getInvoiceByCompanyId(companyId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    // URL: http://localhost:8080/api/v1/companies/{companyId}/clients/{clientId}/invoices
+    @Operation(summary = "Obtiene las facturas por id de empresa y id de cliente")
+    @GetMapping("/companies/{companyId}/clients/{clientId}/invoices")
+    public ResponseEntity<ApiResponse<List<InvoiceResponse>>>
+    getInvoiceByCompanyIdAndClientId(@PathVariable Long companyId, @PathVariable Long clientId) {
+        var response = invoiceService.getInvoiceByCompanyIdAndClientId(companyId, clientId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
