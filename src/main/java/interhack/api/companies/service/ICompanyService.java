@@ -19,4 +19,5 @@ public interface ICompanyService {
      */
     ApiResponse<Object> deleteById(Long companyId);
 
+    ApiResponse<CompanyResponseDto> getCompanyByEmail(String email);
 }

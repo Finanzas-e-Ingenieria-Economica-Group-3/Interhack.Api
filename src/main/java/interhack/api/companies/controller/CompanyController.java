@@ -31,6 +31,13 @@ public class CompanyController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    @Operation(summary = "Obtiene la empresa por email")
+    @GetMapping("/{email}")
+    public ResponseEntity<ApiResponse<CompanyResponseDto>> getCompanyByEmail(@PathVariable String email) {
+        var res = companyService.getCompanyByEmail(email);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Elimina una empresa (ADMIN)")
     @DeleteMapping("/delete/{companyId}")

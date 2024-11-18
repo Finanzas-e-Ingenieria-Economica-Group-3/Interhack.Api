@@ -43,4 +43,15 @@ public class CompanyService implements ICompanyService {
         return new ApiResponse<>("Empresa eliminada correctamente", EStatus.SUCCESS, null);
     }
 
+    @Override
+    public ApiResponse<CompanyResponseDto> getCompanyByEmail(String email) {
+        var user = companyRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró la empresa con email " + email));
+
+        //se mapea el usuario a un DTO
+        var userDto = modelMapper.map(user, CompanyResponseDto.class);
+
+        return new ApiResponse<>("Empresa encontrado", EStatus.SUCCESS, userDto);
+    }
+
 }
