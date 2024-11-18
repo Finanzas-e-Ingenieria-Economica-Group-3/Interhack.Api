@@ -35,6 +35,13 @@ public class ReportController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Operation(summary = "Obtiene el reporte por invoiceId")
+    @GetMapping("/reports/invoices/{invoiceId}")
+    public ResponseEntity<ApiResponse<?>> getReportByInvoiceId(@PathVariable Long invoiceId) {
+        var response = reportService.getReportByInvoiceId(invoiceId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     // URL: http://localhost:8080/api/v1/create_report/invoices/{invoiceId}/banks/{bankId}
     @Operation(summary = "Genera reporte de factura")
     @PostMapping("/invoices/{invoiceId}/banks/{bankId}/reports")

@@ -178,6 +178,16 @@ public class ReportService implements IReportService {
     }
 
     @Override
+    public ApiResponse<ReportResponseDto> getReportByInvoiceId(Long invoiceId) {
+        var report = reportRepository.findByInvoiceId(invoiceId)
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró el reporte con id de factura " + invoiceId));
+
+        var reportResponse = modelMapper.map(report, ReportResponseDto.class);
+
+        return new ApiResponse<>("Reporte encontrado", EStatus.SUCCESS, reportResponse);
+    }
+
+    @Override
     public ApiResponse<List<ReportResponseDto>> getReports() {
         var reports = reportRepository.findAll();
 

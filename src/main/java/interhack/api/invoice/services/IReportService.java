@@ -12,6 +12,7 @@ public interface IReportService {
     ApiResponse<?> deleteReport(Long reportId);
 
     ApiResponse<ReportResponseDto> getReportById(Long reportId);
+    ApiResponse<ReportResponseDto> getReportByInvoiceId(Long invoiceId);
     ApiResponse<List<ReportResponseDto>> getReports();
     ApiResponse<List<ReportResponseDto>> getReportsByCompanyId(Long invoiceId);
 }
