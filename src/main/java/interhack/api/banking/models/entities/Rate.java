@@ -1,6 +1,7 @@
 package interhack.api.banking.models.entities;
 
 
+import interhack.api.banking.models.dtos.requests.RateRequest;
 import interhack.api.banking.models.enums.EPeriod;
 import interhack.api.banking.models.enums.ERateType;
 import jakarta.persistence.*;
@@ -42,5 +43,11 @@ public class Rate {
         this.value = value;
         this.type = rateType;
         this.period = period;
+    }
+
+    public Rate(RateRequest rateRequest) {
+        this.value = rateRequest.getValue();
+        this.type = ERateType.valueOf(rateRequest.getType());
+        this.period = EPeriod.valueOf(rateRequest.getPeriod());
     }
 }

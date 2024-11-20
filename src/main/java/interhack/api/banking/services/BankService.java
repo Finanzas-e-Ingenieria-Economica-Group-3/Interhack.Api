@@ -1,6 +1,8 @@
 package interhack.api.banking.services;
 
+import interhack.api.banking.models.dtos.requests.BankRequest;
 import interhack.api.banking.models.dtos.responses.BankResponse;
+import interhack.api.banking.models.entities.Bank;
 import interhack.api.banking.repositories.IBankRepository;
 import interhack.api.shared.dto.enums.EStatus;
 import interhack.api.shared.dto.response.ApiResponse;
@@ -38,5 +40,19 @@ public class BankService implements IBankService {
         var bankResponse = modelMapper.map(bank, BankResponse.class);
 
         return new ApiResponse<>("Banco encontrado", EStatus.SUCCESS, bankResponse);
+    }
+
+    @Override
+    public ApiResponse<BankResponse> createBank(BankRequest bankRequest) {
+
+
+        var bankEntity = new Bank(bankRequest);
+        bankEntity.setImageUrl("https://avatars.githubusercontent.com/u/12621691?v=4?s=400");
+
+        var newBank = bankRepository.save(bankEntity);
+
+        var bankResponse = modelMapper.map(newBank, BankResponse.class);
+
+        return new ApiResponse<>("Banco creado", EStatus.SUCCESS, bankResponse);
     }
 }

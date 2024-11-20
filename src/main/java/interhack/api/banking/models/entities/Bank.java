@@ -1,5 +1,6 @@
 package interhack.api.banking.models.entities;
 
+import interhack.api.banking.models.dtos.requests.BankRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,5 +37,11 @@ public class Bank {
         this.imageUrl = imageUrl;
         this.ruc = ruc;
         this.rate = rate;
+    }
+
+    public Bank(BankRequest request) {
+        this.name = request.getName();
+        this.ruc = request.getRuc();
+        this.rate = new Rate(request.getRate());
     }
 }

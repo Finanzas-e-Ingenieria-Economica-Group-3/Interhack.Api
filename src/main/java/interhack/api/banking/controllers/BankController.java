@@ -1,5 +1,6 @@
 package interhack.api.banking.controllers;
 
+import interhack.api.banking.models.dtos.requests.BankRequest;
 import interhack.api.banking.models.dtos.responses.BankResponse;
 import interhack.api.banking.services.IBankService;
 import interhack.api.shared.dto.response.ApiResponse;
@@ -7,10 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,4 +38,11 @@ public class BankController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    // URL: http://localhost:8080/api/v1/banks
+    @Operation(summary = "Crea un banco")
+    @PostMapping("/banks")
+    public ResponseEntity<ApiResponse<BankResponse>> createBank(@RequestBody BankRequest bankRequest) {
+        var response = bankService.createBank(bankRequest);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
 }
